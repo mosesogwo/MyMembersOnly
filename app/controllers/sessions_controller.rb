@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
       sign_in user
       remember user
       current_user=(user)
-      debugger
     else
       render 'new'
     end
@@ -16,7 +15,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    debugger
+    # debugger
     redirect_to login_path
   end
 

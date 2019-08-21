@@ -1,0 +1,12 @@
+<h3>All Posts</h3>
+
+<% @posts.each do |post|%>
+  <h5><%= post.title %></h5>
+  <% if !current_user.nil? %>
+  <h6>By <%= post.user.name %><h6>
+  <% end %>
+
+
+
+  <p><%= post.body %></p>
+<% end %>

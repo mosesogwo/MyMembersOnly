@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    if cookies[:remember_token]
+    if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id])
+    elsif cookies[:remember_token]
       @current_user ||= User.find_by(remember_token: cookies[:remember_token])
     end
     @current_user
@@ -25,5 +27,10 @@ class ApplicationController < ActionController::Base
     cookies.delete(:remember_token)
   end
 
+  def signed_in?
+    redirect_to login_path unless !current_user.nil?
+  end
+
+  helper_method :signed_in?, :current_user
 
 end
